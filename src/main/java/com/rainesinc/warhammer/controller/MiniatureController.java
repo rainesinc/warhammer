@@ -28,13 +28,13 @@ public class MiniatureController {
         return service.findMiniatureById(id);
     }
 
-    @GetMapping // READ ALL
+    @GetMapping // READ all
     public List<Miniature> getMiniatures(){
         return StreamSupport
                 .stream(service.findAllMiniatures().spliterator(),false).toList();
     }
 
-    @PutMapping("update") // UPDATE by id
+    @PutMapping("update") // UPDATE by miniature
     public void putMiniature(@Valid @RequestBody Miniature miniature){
         service.updateMiniature(miniature);
     }
