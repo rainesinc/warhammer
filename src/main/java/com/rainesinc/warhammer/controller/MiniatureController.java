@@ -24,7 +24,7 @@ public class MiniatureController {
        return service.addMiniature(miniature);
     }
 
-    @GetMapping("/{id}") // READ by id
+    @GetMapping("readById/{id}") // READ by id
     public Miniature getMiniatureById(@PathVariable("id") int id){
         return service.findMiniatureById(id);
     }
@@ -35,14 +35,14 @@ public class MiniatureController {
                 .stream(service.findAllMiniatures().spliterator(),false).toList();
     }
 
-    @PutMapping("/{id}") // UPDATE by id
+    @PutMapping("updateById/{id}") // UPDATE by id
     public void putMiniature(@PathVariable("id") int id, @Valid @RequestBody Miniature miniature){
         if (!(id == miniature.getId()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "id does not match");
         service.updateMiniature(id, miniature);
     }
 
-    @DeleteMapping("/{id}") // DELETE by id
+    @DeleteMapping("deleteById/{id}") // DELETE by id
     public void deleteMiniatureById(@PathVariable("id") int id){
         service.removeMiniatureById(id);
     }
