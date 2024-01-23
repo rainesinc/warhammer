@@ -14,7 +14,7 @@ public class Miniature {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable = false)
-    private  long id;
+    private  int id;
 
     @Enumerated(EnumType.STRING)
     private Faction faction;
