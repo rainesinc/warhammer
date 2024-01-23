@@ -5,11 +5,10 @@ import com.rainesinc.warhammer.service.MiniatureService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 @AllArgsConstructor
@@ -25,7 +24,7 @@ public class MiniatureController {
     }
 
     @GetMapping("readById/{id}") // READ by id
-    public Miniature getMiniatureById(@PathVariable("id") int id){
+    public Optional<Miniature> getMiniatureById(@PathVariable("id") int id){
         return service.findMiniatureById(id);
     }
 
@@ -35,15 +34,14 @@ public class MiniatureController {
                 .stream(service.findAllMiniatures().spliterator(),false).toList();
     }
 
-    @PutMapping("updateById/{id}") // UPDATE by id
-    public void putMiniature(@PathVariable("id") int id, @Valid @RequestBody Miniature miniature){
-        if (!(id == miniature.getId()))
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "id does not match");
-        service.updateMiniature(id, miniature);
+    @PutMapping("update") // UPDATE by id
+    public void putMiniature(@Valid @RequestBody Miniature miniature){
+        service.updateMiniature(miniature);
     }
 
     @DeleteMapping("deleteById/{id}") // DELETE by id
     public void deleteMiniatureById(@PathVariable("id") int id){
+
         service.removeMiniatureById(id);
     }
 
