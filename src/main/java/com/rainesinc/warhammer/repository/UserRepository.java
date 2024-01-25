@@ -7,11 +7,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    @Query(
-    "SELECT CASE WHEN COUNT(u) > 0 THEN " +
-    "TRUE ELSE FALSE END " +
-    "FROM User u " +
-    "WHER u.email = ?1"
-            )
-    Boolean emailExists(String email);
 }

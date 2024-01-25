@@ -31,9 +31,6 @@ public class UserService {
             throws NoSuchAlgorithmException, BadRequestException {
         if(password.isBlank()) throw new IllegalArgumentException("Password is required.");
 
-        var emailExists = repo.emailExists(user.getEmail());
-        if(emailExists) throw new BadRequestException("Email " + user.getEmail() + " is taken.");
-
         byte[] salt = createSalt();
         byte[] hash = createPasswordHash(password, salt);
 
