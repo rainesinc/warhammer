@@ -1,6 +1,7 @@
 package com.rainesinc.warhammer.controller;
 
 import com.rainesinc.warhammer.entity.Miniature;
+import com.rainesinc.warhammer.exception.NotFoundException;
 import com.rainesinc.warhammer.service.MiniatureService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -20,11 +21,11 @@ public class MiniatureController {
 
     @PostMapping // CREATE
     public Miniature postMiniature(@Valid @RequestBody Miniature miniature){
-       return service.addMiniature(miniature);
+        return service.addMiniature(miniature);
     }
 
     @GetMapping("readById/{id}") // READ by id
-    public Optional<Miniature> getMiniatureById(@PathVariable("id") int id){
+    public Miniature getMiniatureById(@PathVariable("id") int id) throws NotFoundException {
         return service.findMiniatureById(id);
     }
 
@@ -41,7 +42,6 @@ public class MiniatureController {
 
     @DeleteMapping("deleteById/{id}") // DELETE by id
     public void deleteMiniatureById(@PathVariable("id") int id){
-
         service.removeMiniatureById(id);
     }
 

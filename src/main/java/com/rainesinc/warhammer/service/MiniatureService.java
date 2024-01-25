@@ -1,6 +1,7 @@
 package com.rainesinc.warhammer.service;
 
 import com.rainesinc.warhammer.entity.Miniature;
+import com.rainesinc.warhammer.exception.NotFoundException;
 import com.rainesinc.warhammer.repository.MiniatureRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,12 @@ public class MiniatureService {
         repo.save(miniature);
     }
 
-    public Optional<Miniature> findMiniatureById(final int id){
-        return repo.findById(id);
+    public Miniature findMiniatureById(final int id) throws NotFoundException {
+        return repo
+                .findById(id)
+                .orElseThrow(
+                        () -> new NotFoundException("Miniature with id = " + id + " was not found.")
+                );
     }
 
 }
