@@ -25,65 +25,61 @@ import java.util.List;
 @EnableEncryptableProperties
 @ComponentScan(value = "com.rainesinc.warhammer")
 public class SetupDataLoader {
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    RoleRepository roleRepository;
-
-    @Autowired
-    PrivilegeRepository privilegeRepository;
-
-    @PersistenceContext
-    @Autowired
-    private EntityManager entityManager;
-
-    public static void main(String[] args) {
-        SpringApplication.run(SetupDataLoader.class);
-    }
-    @Bean
-    public CommandLineRunner loader() {
-        return (args) -> {
-            Privilege readPrivilege
-                    = createPrivilegeIfNotFound("READ_PRIVILEGE");
-            Privilege writePrivilege
-                    = createPrivilegeIfNotFound("WRITE_PRIVILEGE");
-
-            List<Privilege> adminPrivileges = Arrays.asList(
-                    readPrivilege, writePrivilege);
-            createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
-            createRoleIfNotFound("ROLE_USER", Arrays.asList(readPrivilege));
-
-            Role adminRole = roleRepository.findByName("ROLE_USER");
-
-            User user = new User();
-            user.setEmail("test4@test.com");
-            user.setRoles(Arrays.asList(adminRole));
-            user.setEnabled(true);
-            userService.createUser(user, "password");
-        };
-    }
-
-    @Transactional
-    private Privilege createPrivilegeIfNotFound(String name) {
-
-        Privilege privilege = privilegeRepository.findByName(name);
-        if (privilege == null) {
-            privilege = new Privilege(name);
-            privilegeRepository.save(privilege);
-        }
-        return privilege;
-    }
-
-    @Transactional
-    private void createRoleIfNotFound(
-            String name, Collection<Privilege> privileges) {
-
-        Role role = roleRepository.findByName(name);
-        if (role == null) {
-            role = new Role(name);
-            role.setPrivileges(privileges);
-            roleRepository.save(role);
-        }
-    }
+//    @Autowired
+//    UserService userService;
+//
+//    @Autowired
+//    RoleRepository roleRepository;
+//
+//    @Autowired
+//    PrivilegeRepository privilegeRepository;
+//
+//    @PersistenceContext
+//    @Autowired
+//    private EntityManager entityManager;
+//
+//    public static void main(String[] args) {
+//        SpringApplication.run(SetupDataLoader.class);
+//    }
+//    @Bean
+//    public CommandLineRunner loader() {
+//        return (args) -> {
+//            Privilege readPrivilege
+//                    = createPrivilegeIfNotFound("READ_PRIVILEGE");
+//            Privilege writePrivilege
+//                    = createPrivilegeIfNotFound("WRITE_PRIVILEGE");
+//
+//            List<Privilege> adminPrivileges = Arrays.asList(
+//                    readPrivilege, writePrivilege);
+//            createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
+//            createRoleIfNotFound("ROLE_USER", Arrays.asList(readPrivilege));
+//
+//            Role adminRole = roleRepository.findByName("ROLE_USER");
+//
+//            userService.createUser("test5@test.com", "password");
+//        };
+//    }
+//
+//    @Transactional
+//    private Privilege createPrivilegeIfNotFound(String name) {
+//
+//        Privilege privilege = privilegeRepository.findByName(name);
+//        if (privilege == null) {
+//            privilege = new Privilege(name);
+//            privilegeRepository.save(privilege);
+//        }
+//        return privilege;
+//    }
+//
+//    @Transactional
+//    private void createRoleIfNotFound(
+//            String name, Collection<Privilege> privileges) {
+//
+//        Role role = roleRepository.findByName(name);
+//        if (role == null) {
+//            role = new Role(name);
+//            role.setPrivileges(privileges);
+//            roleRepository.save(role);
+//        }
+//    }
 }

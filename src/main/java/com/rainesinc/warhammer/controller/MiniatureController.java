@@ -6,6 +6,7 @@ import com.rainesinc.warhammer.service.MiniatureService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.stream.StreamSupport;
 @AllArgsConstructor
 @RestController
 @RequestMapping("miniatures")
+@PreAuthorize("isAuthenticated()")
 public class MiniatureController {
     @Autowired
     private MiniatureService service;

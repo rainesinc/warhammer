@@ -27,8 +27,11 @@ public class UserService {
         repo.deleteById(id);
     }
 
-    public User createUser(User user, String password)
+    public User createUser(String email, String password)
             throws NoSuchAlgorithmException, BadRequestException {
+        User user = new User();
+        user.setEmail(email);
+
         if(password.isBlank()) throw new IllegalArgumentException("Password is required.");
 
         byte[] salt = createSalt();
@@ -50,6 +53,15 @@ public class UserService {
                 .orElseThrow(
                         () -> new NotFoundException("User with id = " + id + " was not found.")
                 );
+    }
+
+    public User findByEmail(String email) throws NotFoundException{
+        User user = repo.findByEmail(email);
+        if(user == null){
+            throw new NotFoundException("User with email = " + email + " was not found.");
+        } else {
+            return user;
+        }
     }
 
     private byte[] createSalt() {

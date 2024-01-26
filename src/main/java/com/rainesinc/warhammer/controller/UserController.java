@@ -8,23 +8,25 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
-@RestController
 @AllArgsConstructor
+@RestController
 @RequestMapping("users")
+@PreAuthorize("isAuthenticated()")
 public class UserController {
     @Autowired
     private final UserService service;
 
-    @PostMapping // CREATE
-    public User postUser(@Valid @RequestBody User user, String password)
+    @PostMapping("register") // CREATE
+    public User postUser(@Valid @RequestBody String email, String password)
             throws BadRequestException, NoSuchAlgorithmException {
-        return service.createUser(user, password);
+        return service.createUser(email, password);
     }
 
     @GetMapping("readById/{id}") // READ by id
