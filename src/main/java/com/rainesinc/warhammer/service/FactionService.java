@@ -1,42 +1,41 @@
 package com.rainesinc.warhammer.service;
 
+import com.rainesinc.warhammer.entity.Faction;
 import com.rainesinc.warhammer.entity.Miniature;
 import com.rainesinc.warhammer.exception.NotFoundException;
+import com.rainesinc.warhammer.repository.FactionRepository;
 import com.rainesinc.warhammer.repository.MiniatureRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
 @AllArgsConstructor
-public class MiniatureService {
+public class FactionService {
     @Autowired
-    private MiniatureRepository repo;
+    private FactionRepository repo;
 
-    public Iterable<Miniature> findAllMiniatures() {
+    public Iterable<Faction> findAllFactions() {
         return repo.findAll();
     }
 
-    public void removeMiniatureById(int id){
+    public void removeFactionById(int id){
         repo.deleteById(id);
     }
 
-    public Miniature addMiniature(Miniature miniature){
-        return repo.save(miniature);
+    public Faction addFaction(Faction faction){
+        return repo.save(faction);
     }
 
-    public void updateMiniature(Miniature miniature){
-        repo.save(miniature);
+    public void updateFaction(Faction faction){
+        repo.save(faction);
     }
 
-    public Miniature findMiniatureById(final int id) throws NotFoundException {
+    public Faction findFactionById(final int id) throws NotFoundException {
         return repo
                 .findById(id)
                 .orElseThrow(
-                        () -> new NotFoundException("Miniature with id = " + id + " was not found.")
+                        () -> new NotFoundException("Faction with id = " + id + " was not found.")
                 );
     }
 

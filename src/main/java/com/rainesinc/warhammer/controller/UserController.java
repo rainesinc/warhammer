@@ -1,6 +1,5 @@
 package com.rainesinc.warhammer.controller;
 
-import com.rainesinc.warhammer.entity.Miniature;
 import com.rainesinc.warhammer.entity.User;
 import com.rainesinc.warhammer.exception.NotFoundException;
 import com.rainesinc.warhammer.service.UserService;
@@ -8,7 +7,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
@@ -16,9 +15,8 @@ import java.util.List;
 import java.util.stream.StreamSupport;
 
 @AllArgsConstructor
-@RestController
+@Controller
 @RequestMapping("users")
-@PreAuthorize("isAuthenticated()")
 public class UserController {
     @Autowired
     private final UserService service;

@@ -1,50 +1,65 @@
 package com.rainesinc.warhammer.controller;
 
+import com.rainesinc.warhammer.entity.Faction;
 import com.rainesinc.warhammer.entity.Miniature;
 import com.rainesinc.warhammer.exception.NotFoundException;
+import com.rainesinc.warhammer.service.FactionService;
 import com.rainesinc.warhammer.service.MiniatureService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 @AllArgsConstructor
-@RestController
-@RequestMapping("miniatures")
-@PreAuthorize("isAuthenticated()")
+@Controller
 public class MiniatureController {
     @Autowired
-    private MiniatureService service;
+    private MiniatureService miniatureService;
+
+    @Autowired
+    private FactionService factionService;
+
+    @RequestMapping("/new")
+    public String showNewForm(Model model) {
+        Miniature miniature = new Miniature();
+        model.addAttribute("miniature", miniature);
+        Iterable<Faction> factionList = factionService.findAllFactions();
+        model.addAttribute("factionList", factionList);
+        return "new_form";
+    }
 
     @PostMapping // CREATE
     public Miniature postMiniature(@Valid @RequestBody Miniature miniature){
-        return service.addMiniature(miniature);
+        return miniatureService.addMiniature(miniature);
     }
 
     @GetMapping("readById/{id}") // READ by id
     public Miniature getMiniatureById(@PathVariable("id") int id) throws NotFoundException {
-        return service.findMiniatureById(id);
+        return miniatureService.findMiniatureById(id);
     }
 
-    @GetMapping // READ all
-    public List<Miniature> getMiniatures(){
-        return StreamSupport
-                .stream(service.findAllMiniatures().spliterator(),false).toList();
+    @RequestMapping // READ all
+    public String getMiniatures(Model model){
+        List<Miniature> miniaturesList =
+                StreamSupport
+                .stream(miniatureService.findAllMiniatures().spliterator(),false).toList();
+        model.addAttribute("miniaturesList", miniaturesList);
+        return "index";
     }
 
     @PutMapping("update") // UPDATE by miniature
     public void putMiniature(@Valid @RequestBody Miniature miniature){
-        service.updateMiniature(miniature);
+        miniatureService.updateMiniature(miniature);
     }
 
     @DeleteMapping("deleteById/{id}") // DELETE by id
     public void deleteMiniatureById(@PathVariable("id") int id){
-        service.removeMiniatureById(id);
+        miniatureService.removeMiniatureById(id);
     }
 
 }

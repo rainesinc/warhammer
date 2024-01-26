@@ -16,9 +16,9 @@ public class Miniature {
     @Column(nullable = false, updatable = false)
     private  int id;
 
-    @Enumerated(EnumType.STRING)
-    private Faction faction;
-
     private String name;
+
+    @OneToOne
+    private Faction faction;
 
 }
