@@ -56,13 +56,23 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             List<Role> userRoleList = new ArrayList<>();
             userRoleList.add(aRole);
 
-            userService.createUser("admin@rainesinc.com", "password", adminRoleList);
+            User adminUser1 = new User();
+            adminUser1.setEmail("admin@rainesinc.com");
+            adminUser1.setPassword("password");
+            adminUser1.setRoles(adminRoleList);
+            userService.createUser(adminUser1);
 
+            User user1 = new User();
+            user1.setEmail("user1@rainesinc.com");
+            user1.setPassword("password");
+            user1.setRoles(userRoleList);
+            userService.createUser(user1);
 
-            userService.createUser("user1@rainesinc.com", "password", userRoleList);
-
-
-            userService.createUser("user2@rainesinc.com", "password", userRoleList);
+            User user2 = new User();
+            user2.setEmail("user2@rainesinc.com");
+            user2.setPassword("password");
+            user2.setRoles(userRoleList);
+            userService.createUser(user2);
 
 
         } catch (NoSuchAlgorithmException | BadRequestException e) {

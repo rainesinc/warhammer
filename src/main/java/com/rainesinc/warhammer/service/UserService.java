@@ -14,7 +14,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -34,20 +33,19 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User createUser(String email, String password, Collection<Role> roles)
+    public User createUser(User user)
             throws NoSuchAlgorithmException, BadRequestException {
-        User user = new User();
-        user.setEmail(email);
+
+        String password = user.getPassword();
 
         if(password.isBlank()) throw new IllegalArgumentException("Password is required.");
 
         byte[] salt = createSalt();
         byte[] hash = createPasswordHash(password, salt);
 
+
         user.setSalt(salt);
         user.setHash(hash);
-
-        user.setRoles(roles);
 
         return userRepository.save(user);
     }

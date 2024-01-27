@@ -1,13 +1,10 @@
 package com.rainesinc.warhammer.controller;
 
-import com.rainesinc.warhammer.dto.UserDto;
-import com.rainesinc.warhammer.entity.Miniature;
 import com.rainesinc.warhammer.entity.Role;
 import com.rainesinc.warhammer.entity.User;
 import com.rainesinc.warhammer.exception.NotFoundException;
 import com.rainesinc.warhammer.repository.RoleRepository;
 import com.rainesinc.warhammer.service.UserService;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
@@ -43,26 +41,17 @@ public class UserController {
     public ModelAndView showEditForm(@PathVariable(name = "id") int id) throws NotFoundException {
         ModelAndView mav = new ModelAndView("user_edit_form.html");
         User user = userService.findUserById(id);
-        UserDto userDto = new UserDto();
-        userDto.setId(id);
-        userDto.setPassword("");
-        userDto.setEmail(user.getEmail());
-
-        // todo show currently owned roles
-       // userDto.setRoles(user.getRoles());
-
-        mav.addObject("user", userDto);
-        var roleList = roleRepository.findAll();
+        mav.addObject("user", user);
+        var roleList = roleRepository.findAll(); // todo show selected for already assigned roles
         mav.addObject("roleList", roleList);
         return mav;
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("user") UserDto userDto)
+    public String save(@ModelAttribute("user") User user)
             throws BadRequestException, NoSuchAlgorithmException {
-        userService.createUser(userDto.getEmail(), userDto.getPassword(), userDto.getRoles());
+        userService.createUser(user);
         return "redirect:/users";
-
     }
 
     @RequestMapping

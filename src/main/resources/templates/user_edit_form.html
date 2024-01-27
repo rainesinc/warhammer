@@ -28,7 +28,7 @@
             <tr>
                 <td>Roles:</td>
                 <td>
-                    <select class="form-control" th:field="*{roles}"  id="dropOperator" multiple>
+                    <select class="form-control" name="roles" multiple>
                         <option value="0">select operator</option>
                         <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option>
                     </select>

@@ -7,7 +7,7 @@ goals:
 logging,
 tests,
 miniatures CRUD [DONE],
-users CRUD,
+users CRUD [DONE],
 spring role based security
 
 
