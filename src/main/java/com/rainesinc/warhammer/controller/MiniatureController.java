@@ -31,12 +31,12 @@ public class MiniatureController {
         model.addAttribute("miniature", miniature);
         Iterable<Faction> factionList = factionService.findAllFactions();
         model.addAttribute("factionList", factionList);
-        return "new_form";
+        return "miniature_new_form";
     }
 
     @RequestMapping("/edit/{id}")
     public ModelAndView showEditForm(@PathVariable(name = "id") int id) throws NotFoundException {
-        ModelAndView mav = new ModelAndView("edit_form");
+        ModelAndView mav = new ModelAndView("miniature_edit_form");
         Miniature miniature = miniatureService.findMiniatureById(id);
         mav.addObject("miniature", miniature);
         Iterable<Faction> factionList = factionService.findAllFactions();
