@@ -7,13 +7,15 @@ goals:
 logging,
 tests,
 miniatures CRUD [DONE],
-users CRUD [DONE],
-spring role based security
+users CRUD enable/disable in edit form,
+spring role based security - lock down patterns
 
 
 miniatures -> painted? based?,
 
 convert to H2 database in master branch ,
 convert to maven quickstart archetype
+
+role table entity should be a Java Set
 
     

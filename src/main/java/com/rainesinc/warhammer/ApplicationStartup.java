@@ -1,5 +1,7 @@
 package com.rainesinc.warhammer;
 
+import com.rainesinc.warhammer.entity.Faction;
+import com.rainesinc.warhammer.entity.Role;
 import com.rainesinc.warhammer.repository.RoleRepository;
 import com.rainesinc.warhammer.service.FactionService;
 import com.rainesinc.warhammer.service.UserService;

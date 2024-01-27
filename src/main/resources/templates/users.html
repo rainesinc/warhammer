@@ -16,6 +16,8 @@
             <th>ID</th>
             <th>email</th>
             <th>enabled</th>
+            <th>roles</th>
+            <th>edit</th>
         </tr>
         </thead>
         <tbody>
@@ -23,6 +25,7 @@
             <td th:text="${user.id}">ID</td>
             <td th:text="${user.email}">Email</td>
             <td th:text="${user.enabled}">Enabled</td>
+            <td th:text="${user.roles}">Roles</td>
             <td>
                 <a th:href="@{/users/edit/{id}(id=${user.id})}">Edit</a>
                 &nbsp;&nbsp;&nbsp;

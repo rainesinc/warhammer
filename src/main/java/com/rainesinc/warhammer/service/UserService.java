@@ -1,6 +1,5 @@
 package com.rainesinc.warhammer.service;
 
-import com.rainesinc.warhammer.entity.Role;
 import com.rainesinc.warhammer.entity.User;
 import com.rainesinc.warhammer.exception.NotFoundException;
 import com.rainesinc.warhammer.repository.RoleRepository;
@@ -8,13 +7,13 @@ import com.rainesinc.warhammer.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -40,17 +39,14 @@ public class UserService {
 
         if(password.isBlank()) throw new IllegalArgumentException("Password is required.");
 
-        byte[] salt = createSalt();
-        byte[] hash = createPasswordHash(password, salt);
-
-
-        user.setSalt(salt);
-        user.setHash(hash);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(password));
 
         return userRepository.save(user);
     }
 
     public void updateUser(User user){
+
         userRepository.save(user);
     }
 
