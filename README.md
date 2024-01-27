@@ -8,7 +8,8 @@ logging,
 tests,
 miniatures CRUD [DONE],
 users CRUD enable/disable in edit form,
-spring role based security - lock down patterns
+users CRUD pre-select roles in edit form,
+spring role based security - lock down patterns [DONE]
 
 
 miniatures -> painted? based?,
