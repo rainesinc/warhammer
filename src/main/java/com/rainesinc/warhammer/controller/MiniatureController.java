@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.stream.StreamSupport;
@@ -33,17 +34,24 @@ public class MiniatureController {
         return "new_form";
     }
 
-    @PostMapping // CREATE
-    public Miniature postMiniature(@Valid @RequestBody Miniature miniature){
-        return miniatureService.addMiniature(miniature);
+    @RequestMapping("/edit/{id}")
+    public ModelAndView showEditForm(@PathVariable(name = "id") int id) throws NotFoundException {
+        ModelAndView mav = new ModelAndView("edit_form");
+        Miniature miniature = miniatureService.findMiniatureById(id);
+        mav.addObject("miniature", miniature);
+        Iterable<Faction> factionList = factionService.findAllFactions();
+        mav.addObject("factionList", factionList);
+        return mav;
     }
 
-    @GetMapping("readById/{id}") // READ by id
-    public Miniature getMiniatureById(@PathVariable("id") int id) throws NotFoundException {
-        return miniatureService.findMiniatureById(id);
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(@ModelAttribute("miniature") Miniature miniature){
+         miniatureService.addMiniature(miniature);
+         return "redirect:/";
+
     }
 
-    @RequestMapping // READ all
+    @RequestMapping(value = "/")
     public String getMiniatures(Model model){
         List<Miniature> miniaturesList =
                 StreamSupport
@@ -52,14 +60,16 @@ public class MiniatureController {
         return "index";
     }
 
-    @PutMapping("update") // UPDATE by miniature
-    public void putMiniature(@Valid @RequestBody Miniature miniature){
-        miniatureService.updateMiniature(miniature);
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(@ModelAttribute("miniature") Miniature miniature) {
+            miniatureService.updateMiniature(miniature);
+        return "redirect:/";
     }
 
-    @DeleteMapping("deleteById/{id}") // DELETE by id
-    public void deleteMiniatureById(@PathVariable("id") int id){
+    @RequestMapping(value = "/delete/{id}") // DELETE by id
+    public String delete(@PathVariable("id") int id){
         miniatureService.removeMiniatureById(id);
+        return "redirect:/";
     }
 
 }

@@ -18,7 +18,8 @@ public class Miniature {
 
     private String name;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "faction_id", nullable = false, updatable = true)
     private Faction faction;
 
 }

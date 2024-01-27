@@ -22,11 +22,11 @@
         <tr th:each="miniature : ${miniaturesList}">
             <td th:text="${miniature.id}">ID</td>
             <td th:text="${miniature.name}">Name</td>
-            <td th:text="${miniature.faction}">Faction</td>
+            <td th:text="${miniature.faction?.name}">Faction</td>
             <td>
-                <a th:href="@{/edit/${miniature.id}}">Edit</a>
+                <a th:href="@{/edit/{id}(id=${miniature.id})}">Edit</a>
                 &nbsp;&nbsp;&nbsp;
-                <a th:href="@{/delete/${miniature.id}}">Delete</a>
+                <a th:href="@{/delete/{id}(id=${miniature.id})}">Delete</a>
             </td>
         </tr>
         </tbody>

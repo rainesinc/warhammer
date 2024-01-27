@@ -16,6 +16,7 @@ public class Faction {
     @Column(nullable = false, updatable = false)
     private  int id;
 
+    @Column(unique = true)
     private String name;
 
 }

@@ -17,12 +17,7 @@ public class Encryption {
     public static void main(String[] args){
         Encryption encryption = new Encryption();
         System.out.println(encryption.encrypt(
-                "ThisIsAVeryLongSecretKey" +
-                        "ThisIsAVeryLongSecretKey" +
-                        "ThisIsAVeryLongSecretKey" +
-                        "ThisIsAVeryLongSecretKey" +
-                        "ThisIsAVeryLongSecretKey" +
-                        "ThisIsAVeryLongSecretKey"
+                "password"
         ));
     }
 }
