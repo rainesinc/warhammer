@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.context.ApplicationListener;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.StreamSupport;
 
 @Component
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
@@ -43,22 +46,29 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         bRole.setName("ROLE_USER");
         roleRepository.save(bRole);
 
+
+
         try {
-            userService.createUser("admin@rainesinc.com", "password");
-            userService.createUser("user1@rainesinc.com", "password");
-            userService.createUser("user2@rainesinc.com", "password");
+            var adminRoleList =
+                    StreamSupport
+                            .stream(roleRepository.findAll().spliterator(),false).toList();
+
+            List<Role> userRoleList = new ArrayList<>();
+            userRoleList.add(aRole);
+
+            userService.createUser("admin@rainesinc.com", "password", adminRoleList);
+
+
+            userService.createUser("user1@rainesinc.com", "password", userRoleList);
+
+
+            userService.createUser("user2@rainesinc.com", "password", userRoleList);
+
+
         } catch (NoSuchAlgorithmException | BadRequestException e) {
             throw new RuntimeException(e);
         }
 
-        try {
-            User adminUser = userService.findByEmail("admin@rainesinc.com");
-            Role roleAdmin = roleRepository.findByName("ROLE_ADMIN");
-            adminUser.getRoles().add(roleAdmin);
-            userService.updateUser(adminUser);
-        } catch (NotFoundException e) {
-            throw new RuntimeException(e);
-        }
 
     }
 

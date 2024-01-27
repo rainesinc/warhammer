@@ -5,7 +5,6 @@ import com.rainesinc.warhammer.entity.Miniature;
 import com.rainesinc.warhammer.exception.NotFoundException;
 import com.rainesinc.warhammer.service.FactionService;
 import com.rainesinc.warhammer.service.MiniatureService;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -66,7 +65,7 @@ public class MiniatureController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/delete/{id}") // DELETE by id
+    @RequestMapping(value = "/delete/{id}")
     public String delete(@PathVariable("id") int id){
         miniatureService.removeMiniatureById(id);
         return "redirect:/";

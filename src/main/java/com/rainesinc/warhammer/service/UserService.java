@@ -14,6 +14,8 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Collection;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -32,7 +34,7 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User createUser(String email, String password)
+    public User createUser(String email, String password, Collection<Role> roles)
             throws NoSuchAlgorithmException, BadRequestException {
         User user = new User();
         user.setEmail(email);
@@ -45,8 +47,7 @@ public class UserService {
         user.setSalt(salt);
         user.setHash(hash);
 
-        Role roleUser = roleRepository.findByName("ROLE_USER");
-        user.getRoles().add(roleUser);
+        user.setRoles(roles);
 
         return userRepository.save(user);
     }
