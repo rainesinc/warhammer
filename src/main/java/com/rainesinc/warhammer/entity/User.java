@@ -25,11 +25,7 @@ public class User {
     @Column(nullable = false)
     private Boolean enabled = true;
 
-    @Transient
     private String password = "";
-
-    private byte[] hash;
-    private byte[] salt;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
