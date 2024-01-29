@@ -6,20 +6,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.ComponentScan;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
+@ComponentScan(value = "com.rainesinc.warhammer")
 public class FactionServiceTest {
+
     @Autowired
-    private FactionRepository factionRepository;
-
     private FactionService factionService;
-
-    @BeforeEach
-    public void setup(){
-        factionService = new FactionService(factionRepository);
-    }
 
     @Test
     public void shouldFindAllFactions(){

@@ -8,25 +8,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.ComponentScan;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
+@ComponentScan(value = "com.rainesinc.warhammer")
 public class MiniatureServiceTest {
-    @Autowired
-    private MiniatureRepository miniatureRepository;
 
     @Autowired
-    private FactionRepository factionRepository;
-
     private MiniatureService miniatureService;
+    @Autowired
     private FactionService factionService;
-
-    @BeforeEach
-    public void setup(){
-        miniatureService = new MiniatureService(miniatureRepository);
-        factionService = new FactionService(factionRepository);
-    }
 
     @Test
     public void shouldFindAllMiniatures(){
