@@ -10,20 +10,19 @@ com.rainesinc.warhammer.util.Encryption.java
 
 main application.properties is configured for the postgres database.\
 test application.poroperties is configured for an H2 in memory database.\
-(for integration tests)
+(for services layer integration tests)
 
 todo:\
-faction crud\
-role crud\
+faction crud
 
-role table entity should be a Java Set
+role crud
 
-unit tests, and springboot tests, with junit/Mockito [in progress]
+users CRUD enable/disable in edit forms
 
-logging with slf4j and log4j2\
-users CRUD enable/disable in edit forms,\
-users CRUD pre-select roles in edit form on load\
-create a clone of the project and implement a maven quickstart archetype, 
+users CRUD pre-select roles in edit form on load
+
+create a clone of the project and implement\
+a maven quickstart archetype, 
 "spring-boot-thymeleaf-with-security-archetype"
 
     

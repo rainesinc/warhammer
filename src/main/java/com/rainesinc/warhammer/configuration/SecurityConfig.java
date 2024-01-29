@@ -1,6 +1,8 @@
 package com.rainesinc.warhammer.configuration;
 
 import com.rainesinc.warhammer.security.UserDetailsServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,6 +21,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private static Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -46,6 +50,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        logger.info("Security filter chain being loaded...");
         http
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/login").permitAll()
