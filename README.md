@@ -14,7 +14,7 @@ role table entity should be a Java Set
 
 unit tests with junit/Mockito
 logging with slf4j and log4j2
-users CRUD enable/disable in new form,
+users CRUD enable/disable in edit forms,
 users CRUD pre-select roles in edit form on load,
 
 convert to H2 database in master branch ,
