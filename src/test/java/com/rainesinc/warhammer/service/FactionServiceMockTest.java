@@ -1,9 +1,7 @@
 package com.rainesinc.warhammer.service;
 
 import com.rainesinc.warhammer.entity.Faction;
-import com.rainesinc.warhammer.entity.Miniature;
 import com.rainesinc.warhammer.repository.FactionRepository;
-import com.rainesinc.warhammer.repository.MiniatureRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -24,7 +22,7 @@ class FactionServiceMockTest {
 
 
     @Test
-    public void canAddMiniature(){
+    public void canAddFaction(){
         // given
         Faction faction = new Faction();
         faction.setName("BRETONNIA");
