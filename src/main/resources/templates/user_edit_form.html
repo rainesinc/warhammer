@@ -30,7 +30,8 @@
                 <td>
                     <select class="form-control" name="roles" multiple>
                         <option value="0">select operator</option>
-                        <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option>
+                        <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}" th:selected="${role.selected == true}"></option>
+
                     </select>
                 </td>
             </tr>

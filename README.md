@@ -19,7 +19,5 @@ role crud
 
 users CRUD enable/disable in edit forms
 
-users CRUD pre-select roles in edit form on load
-
 
     

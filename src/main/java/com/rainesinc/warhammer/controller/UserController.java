@@ -42,7 +42,12 @@ public class UserController {
         ModelAndView mav = new ModelAndView("user_edit_form.html");
         User user = userService.findUserById(id);
         mav.addObject("user", user);
-        var roleList = roleRepository.findAll(); // todo show selected for already assigned roles
+        var roleList = roleRepository.findAll();
+        for(Role role : roleList){
+            if(user.getRoles().contains(role)){
+                role.setSelected(true);
+            }
+        }
         mav.addObject("roleList", roleList);
         return mav;
     }
