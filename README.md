@@ -14,10 +14,9 @@ test application.properties is configured for an H2 in memory database.\
 
 todo:\
 faction crud
-
 role crud
-
-users CRUD enable/disable in edit forms
+users CRUD enable/disable in edit forms\
+users CRUD enable create new password.
 
 
     
