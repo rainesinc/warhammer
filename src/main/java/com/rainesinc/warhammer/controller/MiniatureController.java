@@ -17,6 +17,7 @@ import java.util.stream.StreamSupport;
 
 @AllArgsConstructor
 @Controller
+@RequestMapping("/miniatures")
 public class MiniatureController {
     @Autowired
     private MiniatureService miniatureService;
@@ -50,7 +51,7 @@ public class MiniatureController {
 
     }
 
-    @RequestMapping(value = "/")
+    @RequestMapping
     public String getMiniatures(Model model){
         List<Miniature> miniaturesList =
                 StreamSupport
