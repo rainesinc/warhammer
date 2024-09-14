@@ -27,6 +27,16 @@ public class FactionService {
         return repo.save(faction);
     }
 
+    public Faction findFactionByName(String name){
+        Iterable<Faction> factions =  repo.findAll();
+        for(Faction faction : factions){
+            if(faction.getName() != null && faction.getName().equalsIgnoreCase(name)){
+                return faction;
+            }
+        }
+        return null;
+    }
+
     public void updateFaction(Faction faction){
         repo.save(faction);
     }

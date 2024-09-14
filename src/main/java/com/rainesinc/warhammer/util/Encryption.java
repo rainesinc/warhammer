@@ -16,8 +16,6 @@ public class Encryption {
 
     public static void main(String[] args){
         Encryption encryption = new Encryption();
-        System.out.println(encryption.encrypt(
-                "password"
-        ));
+        System.out.println(encryption.encrypt("password"));
     }
 }
