@@ -17,7 +17,7 @@ import java.util.stream.StreamSupport;
 
 @AllArgsConstructor
 @Controller
-@RequestMapping("/miniatures")
+@RequestMapping("/")
 public class MiniatureController {
     @Autowired
     private MiniatureService miniatureService;
