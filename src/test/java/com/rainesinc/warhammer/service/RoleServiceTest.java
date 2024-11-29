@@ -17,7 +17,7 @@ public class RoleServiceTest {
     @Test
     public void shouldFindAllRoles(){
         Role role = new Role();
-        role.setName("ROLE_USER");
+        role.setName("ROLE_TEST");
 
         roleService.addRole(role);
         Iterable<Role> roleIterable = roleService.findAllRoles();
