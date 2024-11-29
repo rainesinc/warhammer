@@ -1,8 +1,6 @@
 package com.rainesinc.warhammer.service;
 
 import com.rainesinc.warhammer.entity.Faction;
-import com.rainesinc.warhammer.repository.FactionRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

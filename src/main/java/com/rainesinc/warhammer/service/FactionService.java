@@ -1,10 +1,8 @@
 package com.rainesinc.warhammer.service;
 
 import com.rainesinc.warhammer.entity.Faction;
-import com.rainesinc.warhammer.entity.Miniature;
 import com.rainesinc.warhammer.exception.NotFoundException;
 import com.rainesinc.warhammer.repository.FactionRepository;
-import com.rainesinc.warhammer.repository.MiniatureRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
