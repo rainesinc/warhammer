@@ -18,7 +18,7 @@ role crud
 users CRUD enable/disable in edit forms\
 users CRUD enable create new password.\
 
-localhost:8080\miniatures
+localhost:8080\
 localhost:8080\users
 
 
