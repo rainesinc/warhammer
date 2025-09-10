@@ -52,6 +52,21 @@ public class UserController {
         return mav;
     }
 
+    @RequestMapping("/showreset/{id}")
+    public ModelAndView showPasswordResetForm(@PathVariable(name = "id") int id) throws NotFoundException {
+        ModelAndView mav = new ModelAndView("password_reset_form.html");
+        User user = userService.findUserById(id);
+        mav.addObject("user", user);
+        return mav;
+    }
+
+    @RequestMapping("/reset")
+    public String resetPassword(@ModelAttribute("user") User user)
+            throws BadRequestException, NoSuchAlgorithmException, NotFoundException {
+        userService.resetPassword(user);
+        return "redirect:/users";
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute("user") User user)
             throws BadRequestException, NoSuchAlgorithmException {

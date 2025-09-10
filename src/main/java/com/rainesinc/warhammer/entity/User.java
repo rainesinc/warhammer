@@ -27,6 +27,9 @@ public class User {
 
     private String password = "";
 
+    @Transient
+    private String newPassword = "";
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",

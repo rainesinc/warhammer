@@ -14,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -45,8 +46,26 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void updateUser(User user){
+    public void resetPassword(User user)
+            throws NoSuchAlgorithmException, BadRequestException, NotFoundException {
 
+        User existingUser = userRepository.findById(user.getId())
+                .orElseThrow(
+                        () -> new NotFoundException("User with id = " + user.getId() + " was not found.")
+                );
+
+        String newPassword = user.getNewPassword();
+
+        if(newPassword.isBlank()) throw new IllegalArgumentException("Password is required.");
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        existingUser.setPassword(passwordEncoder.encode(newPassword));
+
+        userRepository.save(existingUser);
+    }
+
+    public void updateUser(User user){
         userRepository.save(user);
     }
 

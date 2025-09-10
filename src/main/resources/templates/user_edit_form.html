@@ -9,7 +9,7 @@
 <div align="center">
     <h1>Edit User</h1>
     <br />
-    <form action="#" th:action="@{/users/update}" th:object="${user}"
+    <form action="#" th:action="@{/users/reset}" th:object="${user}"
           method="post">
 
         <table border="0" cellpadding="10">
@@ -37,6 +37,14 @@
             </tr>
             <tr>
                 <td colspan="2"><button type="submit">Save</button> </td>
+            </tr>
+        </table>
+    </form>
+    <form action="#" th:action="@{/users/showreset/{id}(id=${user.id})}" th:object="${user}"
+        method="post">
+        <table>
+            <tr>
+                <td colspan="2"><button type="submit">Reset Password</button> </td>
             </tr>
         </table>
     </form>
