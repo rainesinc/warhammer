@@ -53,6 +53,7 @@ public class SecurityConfig {
         logger.info("Security filter chain being loaded...");
         http
                 .authorizeHttpRequests((authz) -> authz
+                        .requestMatchers("/api/miniatures").permitAll()
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/users/**").hasRole("ADMIN")
                         .requestMatchers("/miniatures/**").hasAnyRole("ADMIN", "USER")
